@@ -1,4 +1,4 @@
-{% extends "learning_logs/base.html" %}
+{% extends "base.html" %}
 
 {% block title %} {{ topic }} {% endblock %}
 {% block content %}
@@ -6,11 +6,17 @@
     <p>Topic: {{ topic }}</p>
 
     <p>Entries: </p>
+    <p>
+        <a href="{% url 'new_entry' topic.id %}">Add new entry</a>
+    </p>
     <ul>
         {% for entry in entries %}
         <li>
             <p>{{ entry.date_added | date:'M d, Y H:i' }}</p>
             <p>{{ entry.text | linebreaks }}</p>
+            <p>
+                <a href="{% url 'edit_entry' entry.id %}">edit entry</a>
+            </p>
         </li>
         {% empty %}
         <li>
