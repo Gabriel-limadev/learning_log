@@ -127,7 +127,6 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 
-sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 
 import django_heroku
 django_heroku.settings(locals())
