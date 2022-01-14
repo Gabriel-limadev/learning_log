@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %} Learning_Log {% endblock %}
+{% block header %}
+    <div class="jumbotron">
+        <h1>Acompanhe seu aprendizado</h1>
+    </div>
+{% endblock %}
 {% block content %}
-    <p>Learning Log helps you keep track of your learning, fotr any topic you're learning about.</p>
+
+    {% if user.is_authenticated %}
+        <h2>
+            <a href="{% url 'topics' %}">Visualize ou crie novos tópicos</a> para aumentar seu aprendizado.
+        </h2>
+        <h2>
+            Sempre que você aprender algo sobre um novo registro, faça um pequeno registro resumindo o que voc6e aprendeu.
+        </h2>
+    {% else %}
+        <h2>
+            <a href="{% url 'register' %}">Registre uma conta</a> para fazer seus próprios registros, e listar os topicos que você deseja aprender.
+        </h2>
+        <h2>
+            Sempre que você aprender algo sobre um novo registro, faça um pequeno registro resumindo o que aprendeu.
+        </h2>
+    {% endif %}
 {% endblock %}

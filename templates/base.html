@@ -1,3 +1,4 @@
+{% load bootstrap3 %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,20 +7,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
-    <title>{% block title%}{% endblock %}</title>
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+    <title>Registros</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
 </head>
 <body>
-    <p>
-        <a href="{% url 'index' %}">Learning_Log</a> -
-        {% if user.is_authenticated %}
-        <a href="{% url 'topics' %}">Topics</a> -
-            Hello, {{ user.username }}
-            <a href="{% url 'logout' %}">Log Out</a>
-        {% else %}
-            <a href="{% url 'register' %}">Register</a> -
-            <a href="{% url 'login' %}">Log In</a>
-        {% endif %}
-    </p>
-    {% block content %} {% endblock %}
+<header class="header-area">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                    data-toggle='collapsed' data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar" >
+                </button>
+                <a href="{% url 'index' %}" class="navbar-brand">Registros</a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'topics' %}">Tópicos</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a>Hello, {{ user.username }}</a></li>
+                        <li><a href="{% url 'logout' %}">Sair</a></li>
+                    {% else %}
+                    <li><a href="{% url 'register' %}">Cadastrar</a></li>
+                    <li><a href="{% url 'login' %}">Entrar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            {% block header %}{% endblock %}
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</header>
 </body>
 </html>

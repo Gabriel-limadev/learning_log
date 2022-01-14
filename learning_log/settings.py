@@ -20,8 +20,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Apps criados
     'learning_logs',
     'users',
+    # Usando app de terceiros
+    'bootstrap3',
+    # Apps padrões
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,3 +122,13 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
+
+BOOTSTRAP3 = {
+    'include_jquery': True,
+}
+
+sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
+
+import django_heroku
+django_heroku.settings(locals())
+
